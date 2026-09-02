@@ -297,6 +297,31 @@ Query          Data Processing
 ---
 
 # 📁 Project Architecture
+Architecture
+
+The system follows a hierarchical agent architecture:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│         Multi_Agent-Data-Intelligence (Router)              │
+│         Routes user queries to appropriate sub-agents       │
+└────────────────────┬────────────────────────────────────────┘
+                     │
+         ┌───────────┴───────────┐
+         │                       │
+         ▼                       ▼
+    ┌──────────────┐        ┌──────────────┐
+    │ SQL Analyst  │        │ ETL Analyst  │
+    │   Agent      │        │   Agent      │
+    └──────────────┘        └──────────────┘
+         │                       │
+         ├─► Query Curation      ├─► Extract Load
+         ├─► Schema Context      ├─► Transform Load
+         ├─► SQL Generation      └─► Code Execution
+         ├─► Safety Validation   
+         ├─► Query Execution     
+         └─► Answer Generation   
+```
 
 ```text
 Multi-Agent-Data-Intelligence-System/
@@ -542,7 +567,7 @@ The project is being extended toward a more scalable production architecture.
 - [ ] CSV upload API
 - [ ] Excel support
 - [ ] Google Sheets connector
-- [ ] Additional database connectors
+- [ ] Additional database connecter
 - [ ] Dataset profiling
 - [ ] Data quality validation
 
