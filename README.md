@@ -696,16 +696,6 @@ This project demonstrates practical experience with:
 
 ---
 
-# 💼 Portfolio Relevance
-
-This project demonstrates concepts relevant to roles such as:
-
-- AI Engineer
-- Generative AI Engineer
-- Agentic AI Engineer
-- Forward Deployment Engineer
-- Data Engineer
-- Applied AI Engineer
 
 The project focuses not only on LLM interaction but also on connecting AI agents to real data systems and deterministic tools.
 
