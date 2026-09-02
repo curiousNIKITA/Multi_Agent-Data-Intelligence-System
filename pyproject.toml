@@ -1,7 +1,7 @@
 [project]
-name = "data-agent"
+name = "multi-agent-data-intelligence-system"
 version = "0.1.0"
-description = "Add your description here"
+description = "A LangGraph-based multi-agent system for SQL analytics and ETL workflows."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
