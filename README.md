@@ -368,8 +368,8 @@ Multi-Agent-Data-Intelligence-System/
 ## 1. Clone the Repository
 
 ```bash
-git clone <your-repository-url>
-cd Multi-Agent-Data-Intelligence-System
+git clone https://github.com/curiousNIKITA/Multi_Agent-Data-Intelligence-System.git
+cd Multi_Agent-Data-Intelligence-System
 ```
 
 ---
