@@ -72,6 +72,41 @@ The Router Agent analyzes the user's request and routes it to the appropriate ag
 
 # 🧠 Multi-Agent Architecture
 
+# 📁 Project Architecture
+Architecture
+
+The system follows a hierarchical agent architecture:
+┌─────────────────────────────────────────────────────────────┐
+│                    Data Agent (Router)                      │
+│         Routes user queries to appropriate sub-agents       │
+└────────────────────┬────────────────────────────────────────┘
+                     │
+         ┌───────────┴───────────┐
+         │                       │
+         ▼                       ▼
+    ┌──────────────┐        ┌──────────────┐
+    │ SQL Analyst  │        │ ETL Analyst  │
+    │   Agent      │        │   Agent      │
+    └──────────────┘        └──────────────┘
+         │                       │
+         ├─► Query Curation      ├─► Extract Load
+         ├─► Schema Context      ├─► Transform Load
+         ├─► SQL Generation      └─► Code Execution
+         ├─► Safety Validation   
+         ├─► Query Execution     
+         └─► Answer Generation   
+
+
+State Flow
+
+User Input → Natural language query
+Router Node → Classifies query as SQL or ETL
+Agent Dispatch → Routes to appropriate sub-agent
+Processing → Each agent processes the task
+Output → Returns structured result to user
+
+
+
 ## 1. Router Agent
 
 The Router Agent acts as the entry point for user requests.
@@ -85,21 +120,29 @@ Example:
 
 User:
 "Show me the top 10 customers by revenue."
-        ↓
-Router Agent
-        ↓
-SQL Analyst Agent
 
+        ↓
+
+Router Agent
+
+        ↓
+
+SQL Analyst Agent
+```
 
 Another example:
 
+```text
 User:
 "Extract data from an API, clean it, and convert it to CSV."
-        ↓
-Router Agent
-        ↓
-ETL Analyst Agent
 
+        ↓
+
+Router Agent
+
+        ↓
+
+ETL Analyst Agent
 
 The Router Agent ensures that specialized tasks are handled by the agent best suited for the operation.
 
@@ -126,21 +169,31 @@ Example:
 User Question:
 
 "Show the top 5 customers by total revenue."
-        ↓
-SQL Analyst Agent
-        ↓
-Generate SQL Query
-        ↓
-Execute Query
-        ↓
-PostgreSQL
-        ↓
-Return Results
 
+        ↓
+
+SQL Analyst Agent
+
+        ↓
+
+Generate SQL Query
+
+        ↓
+
+Execute Query
+
+        ↓
+
+PostgreSQL
+
+        ↓
+
+Return Results
+```
 
 Example SQL operation:
 
-sql
+```sql
 SELECT
     customer_id,
     SUM(revenue) AS total_revenue
@@ -148,8 +201,6 @@ FROM orders
 GROUP BY customer_id
 ORDER BY total_revenue DESC
 LIMIT 5;
-
-
 The agent uses database tools to execute the query and retrieve actual results.
 
 
@@ -258,32 +309,39 @@ Query          Data Processing
 
 
 
-# 📁 Project Architecture
-Architecture
-
-The system follows a hierarchical agent architecture:
 
 
-┌─────────────────────────────────────────────────────────────┐
-│         Multi_Agent-Data-Intelligence (Router)              │
-│         Routes user queries to appropriate sub-agents       │
-└────────────────────┬────────────────────────────────────────┘
-                     │
-         ┌───────────┴───────────┐
-         │                       │
-         ▼                       ▼
-    ┌──────────────┐        ┌──────────────┐
-    │ SQL Analyst  │        │ ETL Analyst  │
-    │   Agent      │        │   Agent      │
-    └──────────────┘        └──────────────┘
-         │                       │
-         ├─► Query Curation      ├─► Extract Load
-         ├─► Schema Context      ├─► Transform Load
-         ├─► SQL Generation      └─► Code Execution
-         ├─► Safety Validation   
-         ├─► Query Execution     
-         └─► Answer Generation   
-
+📁 Project Structure
+Data_Agent/
+├── agents/                          # Agent implementations
+│   ├── __init__.py
+│   ├── data_agent.py               # Main router agent
+│   ├── sql_analyst.py              # SQL query agent
+│   └── etl_analyst.py              # ETL operations agent
+│
+├── Models/                          # Data models
+│   ├── __init__.py
+│   └── schema.py                   # Pydantic schemas for state management
+│
+├── utils/                           # Utility modules
+│   ├── __init__.py
+│   ├── database.py                 # PostgreSQL utilities
+│   ├── etl_tools.py                # ETL operations toolkit
+│   ├── llm_pick.py                 # LLM selection logic
+│
+├── data/                            # Data directory
+│   ├── extract/                     # Extracted data storage
+│   ├── transform/                   # Transformed data storage
+│   ├── payments.csv                 # Sample dataset
+│   ├── ratings.csv                  # Sample dataset
+│   ├── rides.csv                    # Sample dataset
+│   ├── users.csv                    # Sample dataset
+│   └── vehicles.csv                 # Sample dataset
+│
+├── main.py                          # Entry point
+├── feed_db.py                       # Database initialization script
+├── pyproject.toml                   # Project metadata and dependencies
+└── README.md                         # This file
 
 
 > The exact folder structure may evolve as the system is extended with additional agents, tools, APIs, and production infrastructure.
