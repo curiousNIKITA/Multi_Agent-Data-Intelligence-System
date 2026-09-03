@@ -92,13 +92,9 @@ Example:
 ```text
 User:
 "Show me the top 10 customers by revenue."
-
         ↓
-
 Router Agent
-
         ↓
-
 SQL Analyst Agent
 ```
 
@@ -107,13 +103,9 @@ Another example:
 ```text
 User:
 "Extract data from an API, clean it, and convert it to CSV."
-
         ↓
-
 Router Agent
-
         ↓
-
 ETL Analyst Agent
 ```
 
@@ -144,25 +136,15 @@ Example:
 User Question:
 
 "Show the top 5 customers by total revenue."
-
         ↓
-
 SQL Analyst Agent
-
         ↓
-
 Generate SQL Query
-
         ↓
-
 Execute Query
-
         ↓
-
 PostgreSQL
-
         ↓
-
 Return Results
 ```
 
@@ -198,13 +180,10 @@ The agent can handle tasks such as:
 
 - Reading CSV files
 - Processing datasets
-- Calling APIs
-- Cleaning data
-- Transforming columns
-- Handling missing values
-- Filtering records
-- Converting data formats
-- Preparing structured datasets
+- API data extraction (JSON to structured formats)
+- Data Transformation using pandas
+- Multi-format support (CSV, JSON, Parquet)
+- 
 
 Example workflow:
 
@@ -360,133 +339,6 @@ Multi-Agent-Data-Intelligence-System/
 ```
 
 > The exact folder structure may evolve as the system is extended with additional agents, tools, APIs, and production infrastructure.
-
----
-
-# 🚀 Installation
-
-## 1. Clone the Repository
-
-```bash
-git clone https://github.com/curiousNIKITA/Multi_Agent-Data-Intelligence-System.git
-cd Multi_Agent-Data-Intelligence-System
-```
-
----
-
-## 2. Create a Virtual Environment
-
-```bash
-python -m venv .venv
-```
-
-Activate the environment.
-
-### Windows
-
-```bash
-.venv\Scripts\activate
-```
-
-### macOS/Linux
-
-```bash
-source .venv/bin/activate
-```
-
----
-
-## 3. Install Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
----
-
-## 4. Configure Environment Variables
-
-Create a `.env` file:
-
-```bash
-cp .env.example .env
-```
-
-Configure the required environment variables for:
-
-- LLM provider
-- API keys
-- PostgreSQL connection
-- Application configuration
-
-Example:
-
-```env
-DATABASE_URL=postgresql://username:password@localhost:5432/database_name
-
-LLM_PROVIDER=your_provider
-LLM_MODEL=your_model
-```
-
-Never commit API keys or passwords to GitHub.
-
----
-
-# 💻 Example Usage
-
-## SQL Analysis
-
-User request:
-
-```text
-Show me the top 5 customers by revenue.
-```
-
-System workflow:
-
-```text
-User Request
-      ↓
-Router Agent
-      ↓
-SQL Analyst Agent
-      ↓
-Generate SQL
-      ↓
-Execute Query
-      ↓
-PostgreSQL
-      ↓
-Return Results
-```
-
----
-
-## ETL Workflow
-
-User request:
-
-```text
-Load a CSV file, remove duplicate records, handle missing values, and save the cleaned data.
-```
-
-System workflow:
-
-```text
-User Request
-      ↓
-Router Agent
-      ↓
-ETL Analyst Agent
-      ↓
-Read Dataset
-      ↓
-Transform Data
-      ↓
-Clean Data
-      ↓
-Return Processed Result
-```
 
 ---
 
@@ -750,4 +602,3 @@ You can:
 
 This project is available for educational, research, and development purposes.
 
-Add an appropriate license file to the repository based on your preferred usage model.
