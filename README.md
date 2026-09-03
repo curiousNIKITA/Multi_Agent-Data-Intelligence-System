@@ -6,7 +6,6 @@ The system uses specialized AI agents orchestrated through **LangGraph** to unde
 
 Instead of using a single AI agent for every task, the system follows a **specialized multi-agent architecture**, where each agent is responsible for a specific type of data operation.
 
----
 
 ## 🎯 Problem Statement
 
@@ -34,7 +33,6 @@ For example:
 
 The **Multi-Agent Data Intelligence System** allows users to express these requests in natural language and delegates the task to specialized agents.
 
----
 
 # 💡 Solution
 
@@ -42,12 +40,12 @@ The system uses a **Router Agent** to understand the user's request and determin
 
 The current architecture includes two primary specialized agents:
 
-- **SQL Analyst Agent**
-- **ETL Analyst Agent**
+ **SQL Analyst Agent**
+ **ETL Analyst Agent**
 
 The Router Agent analyzes the user's request and routes it to the appropriate agent.
 
-```text
+
                          User Request
                               │
                               ▼
@@ -70,17 +68,13 @@ The Router Agent analyzes the user's request and routes it to the appropriate ag
                               │
                               ▼
                         Final Response
-```
 
----
 
 # 🧠 Multi-Agent Architecture
 
 ## 1. Router Agent
 
 The Router Agent acts as the entry point for user requests.
-
-Its responsibility is to:
 
 - Understand the user's natural-language request
 - Identify the type of task
@@ -89,29 +83,26 @@ Its responsibility is to:
 
 Example:
 
-```text
 User:
 "Show me the top 10 customers by revenue."
         ↓
 Router Agent
         ↓
 SQL Analyst Agent
-```
+
 
 Another example:
 
-```text
 User:
 "Extract data from an API, clean it, and convert it to CSV."
         ↓
 Router Agent
         ↓
 ETL Analyst Agent
-```
+
 
 The Router Agent ensures that specialized tasks are handled by the agent best suited for the operation.
 
----
 
 ## 2. SQL Analyst Agent
 
@@ -132,7 +123,6 @@ Typical responsibilities include:
 
 Example:
 
-```text
 User Question:
 
 "Show the top 5 customers by total revenue."
@@ -146,11 +136,11 @@ Execute Query
 PostgreSQL
         ↓
 Return Results
-```
+
 
 Example SQL operation:
 
-```sql
+sql
 SELECT
     customer_id,
     SUM(revenue) AS total_revenue
@@ -158,11 +148,10 @@ FROM orders
 GROUP BY customer_id
 ORDER BY total_revenue DESC
 LIMIT 5;
-```
+
 
 The agent uses database tools to execute the query and retrieve actual results.
 
----
 
 ## 3. ETL Analyst Agent
 
@@ -170,11 +159,10 @@ The ETL Analyst Agent handles data extraction and transformation workflows.
 
 ETL stands for:
 
-```text
 E → Extract
 T → Transform
 L → Load
-```
+
 
 The agent can handle tasks such as:
 
@@ -183,11 +171,10 @@ The agent can handle tasks such as:
 - API data extraction (JSON to structured formats)
 - Data Transformation using pandas
 - Multi-format support (CSV, JSON, Parquet)
-- 
+
 
 Example workflow:
 
-```text
 API / CSV / Data Source
           │
           ▼
@@ -201,17 +188,15 @@ API / CSV / Data Source
           │
           ▼
       Final Output
-```
+
 
 The ETL agent uses Python and Pandas-based operations to process data.
 
----
 
 # ⚙️ System Workflow
 
 The complete workflow follows the sequence below:
 
-```text
 1. User submits a request
             │
             ▼
@@ -239,9 +224,7 @@ Query          Data Processing
             │
             ▼
 5. Results are returned
-```
 
----
 
 # 🏗️ Technology Stack
 
@@ -273,14 +256,14 @@ Query          Data Processing
 - Environment variables
 - `.env` configuration
 
----
+
 
 # 📁 Project Architecture
 Architecture
 
 The system follows a hierarchical agent architecture:
 
-```
+
 ┌─────────────────────────────────────────────────────────────┐
 │         Multi_Agent-Data-Intelligence (Router)              │
 │         Routes user queries to appropriate sub-agents       │
@@ -300,91 +283,12 @@ The system follows a hierarchical agent architecture:
          ├─► Safety Validation   
          ├─► Query Execution     
          └─► Answer Generation   
-```
 
-```text
-Multi-Agent-Data-Intelligence-System/
-│
-├── agents/
-│   ├── router_agent.py
-│   ├── sql_agent.py
-│   └── etl_agent.py
-│
-├── graph/
-│   └── workflow.py
-│
-├── tools/
-│   ├── sql_tools.py
-│   └── etl_tools.py
-│
-├── database/
-│   ├── connection.py
-│   └── models.py
-│
-├── state/
-│   └── agent_state.py
-│
-├── config/
-│   └── settings.py
-│
-├── tests/
-│
-├── requirements.txt
-│
-├── .env.example
-│
-├── main.py
-│
-└── README.md
-```
+
 
 > The exact folder structure may evolve as the system is extended with additional agents, tools, APIs, and production infrastructure.
 
----
 
-# 🔐 Safety and Validation
-
-The system is designed with validation around data and query operations.
-
-Current safety considerations include:
-
-- Structured input handling
-- SQL query validation
-- Controlled database operations
-- Environment-based credential management
-- Separation between agent reasoning and data tools
-
-As the system evolves, additional production security controls can include:
-
-- Role-based access control
-- Authentication and authorization
-- Query permission policies
-- Rate limiting
-- Audit logging
-- Isolated execution environments
-- Resource limits
-- Secret management
-
----
-
-# 🧪 Testing
-
-Run the test suite using:
-
-```bash
-pytest -v
-```
-
-Testing can cover:
-
-- Agent routing
-- SQL operations
-- ETL transformations
-- State transitions
-- Tool execution
-- Error handling
-
----
 
 # 📊 Current Capabilities
 
@@ -400,170 +304,12 @@ The current system focuses on:
 - Natural-language task routing
 - Structured agent state
 
----
 
-# 🚧 Production Roadmap
-
-The project is being extended toward a more scalable production architecture.
-
-## Phase 1 — Core Multi-Agent System
-
-- [x] Router Agent
-- [x] SQL Analyst Agent
-- [x] ETL Analyst Agent
-- [x] LangGraph orchestration
-- [x] Conditional routing
-
-## Phase 2 — Data Platform Improvements
-
-- [ ] CSV upload API
-- [ ] Excel support
-- [ ] Google Sheets connector
-- [ ] Additional database connecter
-- [ ] Dataset profiling
-- [ ] Data quality validation
-
-## Phase 3 — Production API Layer
-
-- [ ] FastAPI backend
-- [ ] REST API endpoints
-- [ ] Request validation
-- [ ] Authentication
-- [ ] Rate limiting
-
-## Phase 4 — Advanced Agent Architecture
-
-- [ ] Supervisor/Orchestrator Agent
-- [ ] Data Quality Agent
-- [ ] Analysis Agent
-- [ ] Insight Agent
-- [ ] Agent collaboration workflows
-
-## Phase 5 — MCP Integration
-
-Planned integration with the Model Context Protocol for standardized tool connectivity.
-
-Potential capabilities include:
-
-```text
-AI Agent
-    │
-    ▼
-MCP Client
-    │
-    ▼
-MCP Server
-    │
- ┌──┼─────────────┐
- ▼  ▼             ▼
-SQL Data      Files       External APIs
-```
-
-This can allow agents to access tools through standardized interfaces.
-
----
-
-## Phase 6 — Scalability
-
-Future architecture may include:
-
-- Async task processing
-- Background workers
-- Distributed processing
-- Caching
-- Containerization
-- Cloud deployment
-- Horizontal scaling
-
----
-
-## Phase 7 — Observability
-
-Future production improvements can include:
-
-- Structured logging
-- Agent tracing
-- Tool execution tracking
-- Error monitoring
-- Performance metrics
-- Cost monitoring
-- Request auditing
-
----
 
 # 🎯 Future Vision
 
 The long-term vision is to evolve this project into a **Data Intelligence Platform** capable of connecting multiple specialized agents to enterprise data systems.
 
-A potential future architecture could look like:
-
-```text
-                         Business User
-                              │
-                              ▼
-                      Natural Language
-                              │
-                              ▼
-                    Supervisor Agent
-                              │
-       ┌──────────────────────┼──────────────────────┐
-       │                      │                      │
-       ▼                      ▼                      ▼
-  SQL Agent              ETL Agent           Data Quality Agent
-       │                      │                      │
-       └──────────────────────┼──────────────────────┘
-                              │
-                              ▼
-                        Data Tools
-                              │
-        ┌─────────────────────┼─────────────────────┐
-        │                     │                     │
-        ▼                     ▼                     ▼
-    PostgreSQL              Files                APIs
-                              │
-                              ▼
-                       Final Response
-```
-
----
-
-# 🎓 What This Project Demonstrates
-
-This project demonstrates practical experience with:
-
-- Multi-agent system design
-- LangGraph
-- Agent routing
-- Conditional workflows
-- Specialized AI agents
-- LLM orchestration
-- SQL automation
-- PostgreSQL
-- ETL pipelines
-- Pandas
-- Tool-based AI systems
-- Structured state management
-- Pydantic validation
-- Production-oriented AI architecture
-
----
-
-
-The project focuses not only on LLM interaction but also on connecting AI agents to real data systems and deterministic tools.
-
----
-
-# 👨‍💻 Project Information
-
-**Multi-Agent Data Intelligence System** is an engineering project focused on exploring and building practical multi-agent workflows for data analysis and data operations.
-
-The architecture follows the principle that:
-
-> **AI agents should orchestrate and reason about tasks, while deterministic tools perform database queries and data transformations.**
-
-This separation helps make data operations more reliable, traceable, and easier to extend.
-
----
 
 # 📈 Planned Integration with Business Intelligence
 
@@ -572,17 +318,19 @@ This project provides a foundation for more advanced data intelligence workflows
 Future extensions can support:
 
 - Business KPI analysis
+- Data Platform Improvements[EX- CRM, ERP, Power BI, Dynamic 365]
 - Automated data profiling
+- MCP Integration
 - Root cause analysis
 - Anomaly detection
 - Business insights
 - Recommendation generation
 - Automated reports
+- Cloud deployment
 - Interactive dashboards
 
 This creates a natural path from a **data operations agent** toward a broader **AI-powered business intelligence system**.
 
----
 
 # 🤝 Contributing
 
@@ -595,8 +343,6 @@ You can:
 - Propose a new agent
 - Add a new data connector
 - Improve testing and evaluation
-
----
 
 # 📄 License
 
