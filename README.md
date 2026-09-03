@@ -71,9 +71,7 @@ The Router Agent analyzes the user's request and routes it to the appropriate ag
 
 
 
-
-# 📁 Project Architecture
-
+## 🏗️ Architecture
 
 The system follows a hierarchical agent architecture:
 
@@ -106,6 +104,7 @@ The system follows a hierarchical agent architecture:
 3. **Agent Dispatch** → Routes to appropriate sub-agent
 4. **Processing** → Each agent processes the task
 5. **Output** → Returns structured result to user
+
 
 
 ## 1. Router Agent
