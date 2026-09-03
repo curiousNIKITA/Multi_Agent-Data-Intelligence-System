@@ -70,12 +70,14 @@ The Router Agent analyzes the user's request and routes it to the appropriate ag
                         Final Response
 
 
-# 🧠 Multi-Agent Architecture
+
 
 # 📁 Project Architecture
-Architecture
+
 
 The system follows a hierarchical agent architecture:
+
+```
 ┌─────────────────────────────────────────────────────────────┐
 │                    Data Agent (Router)                      │
 │         Routes user queries to appropriate sub-agents       │
@@ -95,16 +97,15 @@ The system follows a hierarchical agent architecture:
          ├─► Safety Validation   
          ├─► Query Execution     
          └─► Answer Generation   
+```
 
+### State Flow
 
-State Flow
-
-User Input → Natural language query
-Router Node → Classifies query as SQL or ETL
-Agent Dispatch → Routes to appropriate sub-agent
-Processing → Each agent processes the task
-Output → Returns structured result to user
-
+1. **User Input** → Natural language query
+2. **Router Node** → Classifies query as SQL or ETL
+3. **Agent Dispatch** → Routes to appropriate sub-agent
+4. **Processing** → Each agent processes the task
+5. **Output** → Returns structured result to user
 
 
 ## 1. Router Agent
